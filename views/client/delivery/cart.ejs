@@ -1,0 +1,98 @@
+<%- include("../partials/header"); %>
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <% if (msg !=undefined) { %>
+                <div class="alert alert-warning alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5>Alerta!</h5>
+                    <%= msg %>
+                </div>
+                <% } %>
+                    <div class="cart_inner">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Produto</th>
+                                        <th scope="col">Preço</th>
+                                        <th scope="col">Quantidade</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% cart['productsInCart'].forEach((productItemInCart)=> { %>
+                                        <tr>
+                                            <td>
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        <p>
+                                                            <a href="/delivery/deletetocart/<%= productItemInCart.product.id %>"
+                                                                class="btn btn-danger btn-sm">x</a> <a
+                                                                href="/delivery/product/<%= productItemInCart.product.id %>"
+                                                                style="color: rgb(39, 39, 39);">
+                                                                <img src="/assets/images/products/<%= productItemInCart.product.imgUrl %>"
+                                                                    style="width: 50px;">
+                                                                <%= productItemInCart.product.name %>
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>
+                                                    R$ <%= parseFloat(productItemInCart.product.price).toFixed(2).replace(".", ","); %>
+                                                </h5>
+                                            </td>
+                                            <td>
+                                                <div class="product_count">
+
+                                                    <input type="text" value="<%= productItemInCart.quantity %>" title="Quantity:" class="input-text qty">
+
+                                                    <form method="POST" action="/delivery/increasetocart">
+                                                        <input type="text" name="id" value="<%= productItemInCart.product.id %>" readonly hidden>
+                                                        <button type="submit" class="increase items-count">
+                                                            <i class="lnr lnr-chevron-up"></i>
+                                                        </button>
+                                                    </form>
+
+                                                    <form method="POST" action="/delivery/decreasetocart">
+                                                        <input type="text" name="id" value="<%= productItemInCart.product.id %>" readonly hidden>
+                                                        <button class="reduced items-count">
+                                                            <i class="lnr lnr-chevron-down"></i>
+                                                        </button>
+                                                    </form>
+
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>
+                                                    R$ <%=parseFloat(productItemInCart.total).toFixed(2).replace(".", ","); %>
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        <% }); %>
+                                            <tr>
+                                                <th colspan="4" style="text-align: right;">
+                                                    <span>
+                                                        Valor: R$ <%= parseFloat(cart.value).toFixed(2).replace(".", ","); %>
+                                                    </span>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" style="text-align: right;">
+                                                    <div class="checkout_btn_inner align-items-rigth">
+                                                        <form method="POST" action="/delivery/createorder">
+                                                            <button type="submit" class="btn primary-btn">Finalizar
+                                                                pedido</button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+    </section>
+    <!--================End Cart Area =================-->
+    <%- include("../partials/footer"); %>

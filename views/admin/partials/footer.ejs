@@ -1,0 +1,89 @@
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2021 <a href="/">Loja do 1 Real</a>.</strong>
+    Todos os direitos reservados!
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Versão</b> 1.0.0
+    </div>
+  </footer>
+<!-- ./wrapper -->
+
+
+<!-- REQUIRED SCRIPTS -->
+<script src="/views/admin/scripts/jquery.mask.min.js"></script>
+<!-- Bootstrap -->
+<script src="/views/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE -->
+<script src="/views/admin/dist/js/adminlte.js"></script>
+
+<!-- DataTables  & Plugins -->
+<script src="/views/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/views/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script>
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+      });
+      
+    });
+  </script>
+
+  
+<!-- bs-custom-file-input -->
+<script src="/views/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!-- bs-custom-file script -->
+<script>
+  $(function () {
+    bsCustomFileInput.init();
+  });
+</script>
+
+<script>
+  let url = document.URL;
+  url = url.replace("http://localhost:8090", "");
+  if (url == '/admin/home'){
+    document.getElementById('pag=/home').style = 'background-color: #007BFF';
+  }
+  if (url == '/admin/categories/create'){
+    document.getElementById('pag=/categories').style = 'background-color: #007BFF';
+    document.getElementById('pag=/categoriescreate').style = 'background-color: #007Baa';
+    document.getElementById('ulcategories').classList.add("menu-open");
+  }
+  if (url == '/admin/categories'){
+    document.getElementById('pag=/categories').style = 'background-color: #007BFF';
+    document.getElementById('pag=/categorieslist').style = 'background-color: #007Baa';
+    document.getElementById('ulcategories').classList.add("menu-open");
+  }
+
+  if (url == '/admin/products/create'){
+    document.getElementById('pag=/products').style = 'background-color: #007BFF';
+    document.getElementById('pag=/productscreate').style = 'background-color: #007Baa';
+    document.getElementById('ulproducts').classList.add("menu-open");
+  }
+  if (url == '/admin/products'){
+    document.getElementById('pag=/products').style = 'background-color: #007BFF';
+    document.getElementById('pag=/productslist').style = 'background-color: #007Baa';
+    document.getElementById('ulproducts').classList.add("menu-open");
+  }
+
+  if (url == '/admin/partners/create'){
+    document.getElementById('pag=/partners').style = 'background-color: #007BFF';
+    document.getElementById('pag=/partnerscreate').style = 'background-color: #007Baa';
+    document.getElementById('ulpartners').classList.add("menu-open");
+  }
+  if (url == '/admin/partners'){
+    document.getElementById('pag=/partners').style = 'background-color: #007BFF';
+    document.getElementById('pag=/partnerslist').style = 'background-color: #007Baa';
+    document.getElementById('ulpartners').classList.add("menu-open");
+  }
+
+  if (url == '/admin/partners/schedules'){
+    document.getElementById('pag=/partners').style = 'background-color: #007BFF';
+    document.getElementById('pag=/partnersschedules').style = 'background-color: #007Baa';
+    document.getElementById('ulpartners').classList.add("menu-open");
+  }
+</script>
+
+</body>
+</html>

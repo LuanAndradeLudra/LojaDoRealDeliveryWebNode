@@ -1,0 +1,86 @@
+<%- include("./partials/header"); %>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Seja um franqueado</h5>
+		  <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">X</button>
+		</div>
+		<div class="modal-body">
+		<div class="embed-responsive embed-responsive-16by9">
+			<video controls="true" class="embed-responsive-item">
+			  <source src="/assets/videos/video1.mp4" type="video/mp4" />
+			</video>
+		</div>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+	<!--================Contact Area =================-->
+	<section class="contact_area section_gap_bottom">
+		<div class="container" style="margin-top: 50px;">
+			
+			<% if (msg !=undefined) { %>
+				<div class="alert alert-warning alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<h5>Alerta!</h5>
+					<%= msg %>
+				</div>
+				<% } %>
+			<h2>Seja um franqueado</h2>
+			<a href="#" class="mb-4" data-toggle="modal" data-target="#exampleModal">
+				Clique aqui para assistir um video preparado pra você
+			</a>
+			<p>
+				Que bacana receber seu contato, a nossa franquia sem dúvidas é um grande investimento pra quem deseja
+				começar o ano investindo no seu próprio negócio. <br />
+				Vamos a algumas informações importantes: <br />
+				- a loja precisa ter no mínimo 60m2 <br />
+				- a taxa de adesão da franquia é de R$10mil <br />
+				- você irá pagar R$1000,00 mensais que é um taxa administrativa <br />
+				- você terá a acesso a compra de todos os nossos produtos através do nosso catálogo virtual com um preço
+				exclusivo para franqueados <br />
+				- obras na loja, maquinário, lonas, informática e sistema operacional são por conta do franqueado,
+				porém, nós lhe passaremos todos os contatos de fornecedores para orçamento após assinatura do contrato <br />
+				- o estoque inicial vai depender do tamanho de sua loja, calculamos em média R$800,00 a R$1000,00 por m2 <br />
+				<br />
+				Após assinatura do contrato e agendamento da data de inauguração, nós enviamos uma equipe de suporte
+				para treinar seu time (2 dias antes da inauguração e também passamos o dia da inauguração com você),
+				caso queira treinar um pouco mais sua equipe, eles poderão treinar em uma de nossas lojas próprias. <br />
+				<br />
+
+				Caso tenha alguma dúvida, estamos às ordens! <br />
+				Para informações mais detalhadas, caso realmente tenha interesse, nós podemos agendar uma reunião 😉❤💛 <br />
+				Será um prazer recebe-lo na rede de lojas que mais cresce no Rio de Janeiro 💰💲💸🛒 <br />
+			</p>
+			<form class="row contact_form mt-4" action="/beapartner" method="post" id="contactForm">
+				<div class="col-md-8">
+					<div class="form-group">
+						<input type="text" class="form-control" id="name" name="name" placeholder="Seu nome"
+							onfocus="this.placeholder = ''" onblur="this.placeholder = 'Seu nome'" required>
+					</div>
+					<div class="form-group">
+						<input type="email" class="form-control" id="email" name="email" placeholder="Seu email"
+							onfocus="this.placeholder = ''" onblur="this.placeholder = 'Seu email'" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="subject" name="phone" placeholder="Seu telefone"
+							onfocus="this.placeholder = ''" onblur="this.placeholder = 'Seu telefone'" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="subject" name="document" placeholder="Cpf ou Cnpj"
+							onfocus="this.placeholder = ''" onblur="this.placeholder = 'Cpf ou Cnpj'" required>
+					</div>
+				</div>
+				<div class="col-md-8 text-right">
+					<button type="submit" value="submit" class="primary-btn">Enviar</button>
+				</div>
+			</form>
+		</div>
+	</section>
+	<!--================Contact Area =================-->
+	<%- include("./partials/footer"); %>

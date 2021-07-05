@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="/assets/images/logo.ico">
+    <!-- Author Meta -->
+    <meta name="author" content="CodePixar">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>Loja do Real</title>
+    <!--
+		CSS
+		============================================= -->
+    <link rel="stylesheet" href="/views/client/css/linearicons.css">
+    <link rel="stylesheet" href="/views/client/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/views/client/css/themify-icons.css">
+    <link rel="stylesheet" href="/views/client/css/bootstrap.css">
+    <link rel="stylesheet" href="/views/client/css/owl.carousel.css">
+    <link rel="stylesheet" href="/views/client/css/nice-select.css">
+    <link rel="stylesheet" href="/views/client/css/nouislider.min.css">
+    <link rel="stylesheet" href="/views/client/css/ion.rangeSlider.css" />
+    <link rel="stylesheet" href="/views/client/css/ion.rangeSlider.skinFlat.css" />
+    <link rel="stylesheet" href="/views/client/css/magnific-popup.css">
+    <link rel="stylesheet" href="/views/client/css/main.css">
+
+    <script src="/views/client/js/vendor/jquery-2.2.4.min.js"></script>
+</head>
+
+<body>
+    <div class="col-12" style="width: 100%; background-color: #f2d734;">
+        <div class="container">
+            <center><img src="/assets/images/web/banner.png" width="300px"></center>
+            <div style="background-color: white; width: 100%; height: 80px; border-radius: 40px; align-items: center;display: flex;
+            flex-wrap: wrap;
+            align-content: center;">
+                <div style="background-color: #f2d734; width: 100%; height: 60px; margin: 20px; border-radius: 40px; align-items: center;display: flex;
+            flex-wrap: wrap;
+            align-content: center;">
+
+                    <div class="col-sm-10 col-9">
+                       <form method="GET" action="/delivery">
+                        <input class="form-control" type="text" style="margin: 20px; border-radius: 40px;"
+                        placeholder="Pesquisar..." name="query">
+                    </form>
+                    </div>
+                    <div class="col-sm-2 col-1" style="padding-left: 50px;">
+                        <a href="#" style="color: white; font-size: 18px;"><span class="lnr lnr-magnifier" id="search"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-2" style="margin-bottom: 100px;">
+				<div class="sidebar-categories">
+                    <a href="/" style="text-decoration: none; color: black;">
+                        <div class="text-center mt-4">
+                          <img src="/assets/images/web/webico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                          Inicio
+                        </div>
+                      </a>
+                    <% if (order == ""){ %>
+                        <a href="/delivery" style="text-decoration: none; color: black;">
+                            <div class="text-center mt-4">
+                              <img src="/assets/images/web/deliveryico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                              Delivery
+                            </div>
+                          </a>
+                    <% } %>
+                    <% if (order == ""){ %>
+                    <a href="/delivery/cart" style="text-decoration: none; color: black;">
+                        <div class="text-center mt-4">
+                            <img src="/assets/images/web/cartico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                        Carrinho (<%= quantityItemsInCart %>)
+                        </div>
+                    </a>
+                    <% } %>
+                    <% if (order != ""){ %>
+                        <a href="/delivery/order" style="text-decoration: none; color: black;">
+                            <div class="text-center mt-4">
+                                <img src="/assets/images/web/deliveryico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                            Pedido
+                            </div>
+                        </a>
+                        <% } %>
+                        <% if (clientA != undefined){ %> 
+                            <a href="/logout" style="text-decoration: none; color: black;">
+                                <div class="text-center mt-4">
+                                  <img src="/assets/images/web/logoutico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                                  Sair
+                                </div>
+                              </a>
+                          <% } else { %> 
+                          <a href="/login" style="text-decoration: none; color: black;">
+                            <div class="text-center mt-4">
+                              <img src="/assets/images/web/loginico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                              Login
+                            </div>
+                          </a>
+                        <% } %>
+                    <a href="/beapartner" style="text-decoration: none; color: black;">
+                        <div class="text-center mt-4">
+                            <img src="/assets/images/web/partnerico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                        Seja um franqueado
+                        </div>
+                    </a>
+				</div>
+			</div>
+			<div class="col-10">

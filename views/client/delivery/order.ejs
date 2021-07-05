@@ -1,0 +1,113 @@
+<%- include("../partials/header"); %>
+<script>
+	function print(){
+		
+		var order = document.getElementById('order').innerHTML;
+		var mywindow = window.open('', 'my div', 'height=800,width=800');
+
+		mywindow.document.write("<html> <head> <link rel='stylesheet' href='/views/client/css/linearicons.css'>" +
+		"<link rel='stylesheet' href='/views/client/css/font-awesome.min.css'>" +
+		"<link rel='stylesheet' href='/views/client/css/themify-icons.css'>" +
+		"<link rel='stylesheet' href='/views/client/css/bootstrap.css'>" +
+		"<link rel='stylesheet' href='/views/client/css/owl.carousel.css'>" +
+		"<link rel='stylesheet' href='/views/client/css/nice-select.css'>" +
+		"<link rel='stylesheet' href='/views/client/css/nouislider.min.css'>" +
+		"<link rel='stylesheet' href='/views/client/css/ion.rangeSlider.css' />" +
+		"<link rel='stylesheet' href='/views/client/css/ion.rangeSlider.skinFlat.css' />" +
+		"<link rel='stylesheet' href='/views/client/css/magnific-popup.css'>" +
+    "<link rel='stylesheet' href='/views/client/css/main.css'></head><body>");
+		mywindow.document.write(order + '</body>'); 
+		mywindow.document.close();
+		mywindow.focus();
+		var intervalPrint = setInterval(function(){ mywindow.print(); 
+		clearInterval(intervalPrint);}, 500);
+		return true;
+	}
+</script>
+<!--================Order Details Area =================-->
+	<section class="order_details section_gap" id="order">
+		<div class="container">
+			<b>Pedido n° <%= order.id %></b> Status: <%= stage %> 
+			<% if (order.stage == 3){ %>
+				<br /><br />
+				<form method="POST" action="/delivery/confirmorder">
+					<button type="submit" class="btn btn-warning">Confirmar</button>
+					<button class="btn btn-ligth" onclick="event.preventDefault(); print()">Imprimir</button>
+				</form>
+				<br /><br />
+			<% } else { %>
+				<br /><br />
+				<button type="submit" class="btn btn-ligth" onclick="document.location.reload(true)">Atualizar</button>	<button class="btn btn-ligth" onclick="print()">Imprimir</button>	
+				<br /><br />
+			<% } %>
+			<br />
+			<div class="row invoice-info">
+				<div class="col-sm-6 invoice-col">
+				  Franquia
+				  <address>
+					<strong><%= order.partner.name %></strong><br>
+					Email: <%= order.partner.email %><br>
+					Telefone: <%= order.partner.phone %><br>
+					Localidade: <%= order.partner.cep %> | <%= order.partner.city %> | <%= order.partner.district %> <br>
+					Endereço: <%= order.partner.address %>, n° <%= order.partner.number %><br>
+					Documento: <%= order.partner.document %>
+				  </address>
+				</div>
+				<!-- /.col -->
+				<div class="col-sm-6 invoice-col">
+				  Cliente
+				  <address>
+					<strong><%= order.client.name %></strong><br>
+					Email: <%= order.client.email %><br>
+					Telefone: <%= order.client.phone %><br>
+					Localidade: <%= order.client.cep %> | <%= order.partner.city %> | <%= order.partner.district %> <br>
+					Endereço: <%= order.client.address %>, n° <%= order.client.number %>
+				  </address>
+				</div>
+				<!-- /.col -->
+			  </div>
+			  <!-- /.row -->
+  
+			  <!-- Table row -->
+			  <div class="row">
+				<div class="col-12 table-responsive">
+				  <table class="table table-striped">
+					<thead>
+					<tr>
+					  <th>Id</th>
+					  <th>Nome</th>
+					  <th>Quantidade de produtos: </th>
+					  <th>Unitário</th>
+					  <th>Total</th>
+					</tr>
+					</thead>
+					<tbody>
+					<% orderProducts.forEach(orderProduct => { %>
+					  <tr>
+						<td><%= orderProduct.product.id %></td>
+						<td><%= orderProduct.product.name %></td>
+						<td><%= orderProduct.quantity %></td>
+						<td>R$ <%=
+							parseFloat(orderProduct.product.price).toFixed(2).replace(".", ","
+							); %></td>
+						<td>R$ <%=
+							parseFloat(orderProduct.total).toFixed(2).replace(".", ","
+							); %></td>
+					  </tr>
+					<% }); %>
+					<tr>
+					  <td colspan="5" style="text-align: right;">Total: R$ <%=
+						parseFloat(order.value).toFixed(2).replace(".", ","
+						); %></td>
+					</tr>
+					</tbody>
+				  </table>
+				</div>
+				<!-- /.col -->
+			  </div>
+			  <!-- /.row -->
+			</div>
+		</div>
+	</section>
+	<!--================End Order Details Area =================-->
+	<%- include("../partials/footer"); %>

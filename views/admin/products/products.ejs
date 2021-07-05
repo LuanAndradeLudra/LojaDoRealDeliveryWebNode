@@ -1,0 +1,83 @@
+<%- include("../partials/header"); %>
+  <%- include("../partials/navbar"); %>
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <% if (msg !=undefined) { %>
+            <div class="alert alert-info alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h5><i class="icon fas fa-info"></i> Alerta!</h5>
+              <%= msg %>
+            </div>
+            <% } %>
+              <div class="row mb-2">
+                <div class="col-sm-12">
+                  <h1 class="m-0">Produtos</h1>
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <!-- Main content -->
+      <div class="content">
+        <div class="container-fluid">
+
+          <div class="card">
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="col-1">Id</th>
+                  <th class="col-4">Nome</th>
+                  <th class="col-2">Preço</th>
+                  <th>Quantidade</th>
+                  <th>Categoria</th>
+                  <th class="col-3">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+              <% products.forEach((product) => { %>    
+                <tr>
+                  <td><%= product.id %></td>
+                  <td><%= product.name %> </td>
+                  <td>R$ <%= parseFloat(product.price).toFixed(2).replace(".", ","); %> </td>
+                  <td><%= product.amount %> </td>
+                  <td><%= product.category.name %> </td>
+                  <td>
+                    <a style="float: left; margin-right: 8px;" href="/admin/products/edit/<%= product.id %>" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i></a>
+                    <form method="POST" action="/admin/products/delete" onsubmit="return confirm('Deseja realmente deletar o produto <%= product.name %>')">
+                      <% if (product.imgUrl != 'defaultProduct.png') { %>
+                        <input type="text" value="<%= product.imgUrl %>" name="imgUrl" readonly required hidden>
+                      <% } %>
+                      <input type="text" value="<%= product.id %>" name="id" readonly required hidden>
+                      <input type="text" value="<%= product.name %>" name="name" readonly required hidden>
+                      <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></input>
+                    </form>
+                  </td>
+                </tr>
+              <% }); %>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Id</th>
+                  <th>Nome</th>
+                  <th>Preço</th>
+                  <th>Quantidade</th>
+                  <th>Ações</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+<%- include("../partials/footer"); %>

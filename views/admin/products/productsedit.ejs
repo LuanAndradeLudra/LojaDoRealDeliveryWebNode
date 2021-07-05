@@ -1,0 +1,109 @@
+<%- include("../partials/header"); %>
+  <%- include("../partials/navbar"); %>
+  <script>
+		$(document).ready(function(){
+			$('#priceInput').mask("#.##0.00", {reverse: true});
+		});
+	  </script>
+    <div class="content-wrapper">
+
+      <!-- Main content -->
+      <div class="content mt-2">
+        <div class="container-fluid">
+          <div class="col-md-12">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Produto</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form method="POST" action="/admin/products/edit" enctype="multipart/form-data">
+                <input type="text" value="<%= product.id %>" name="id" readonly required hidden>
+
+                <% if (product.imgUrl !='defaultProduct.png' ) { %>
+                  <input type="text" value="<%= product.imgUrl %>" name="oldImg" readonly required hidden>
+                  <% } %>
+
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Nome</label>
+                        <input type="text" value="<%= product.name %>" class="form-control" id="exampleInputEmail1"
+                          placeholder="Nome do produto" name="name" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Descrição</label>
+                        <input type="text" value="<%= product.description %>" class="form-control"
+                          id="exampleInputEmail2" placeholder="Descrição do produto" name="description" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Preço</label>
+                        <input type="text" value="<%= parseFloat(product.price).toFixed(2).replace(".", ","); %>" id="priceInput" class="form-control" id="exampleInputEmail2"
+                          placeholder="Preço do produto" name="price" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Quantidade</label>
+                        <input type="number" value="<%= product.amount %>" class="form-control" id="exampleInputEmail2"
+                          placeholder="Quantidade" name="amount" required>
+                      </div>
+
+                      <select class="custom-select rounded-0" id="exampleSelectRounded0" name="categoryId">
+                        <option value="<%= product.categoryId %>">
+                          <%= product.category.name %>
+                        </option>
+                        <% categories.forEach((category)=> { %>
+                          <% if (category.id !=product.categoryId){ %>
+                            <option value="<%= category.id %>">
+                              <%= category.name %>
+                            </option>
+                            <% } %>
+                              <% }); %>
+                      </select>
+
+
+                      <div class="form-group">
+                        <label for="exampleInputFile">Imagem</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="exampleInputFile" name="imgUrl">
+                            <label class="custom-file-label" for="exampleInputFile">
+                              <% if (product.imgUrl !='defaultProduct.png' ) { %>
+                                <%= product.imgUrl %>
+                                  <% } else { %>
+                                    Selecione uma imagem
+                                    <% } %>
+                            </label>
+                          </div>
+                          <div class="input-group-append">
+                            <span class="input-group-text">Upload</span>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">Editar</button>
+                    </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+
+
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <%- include("../partials/footer"); %>

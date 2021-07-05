@@ -1,0 +1,101 @@
+<%- include("../partials/header"); %>
+  <%- include("../partials/navbar"); %>
+  <script type="text/javascript" src="/views/admin/scripts/findCep.js"></script>
+  <script>
+		$(document).ready(function(){
+			$('#phoneInput').mask('(00) 000000009');
+			$('#cepInput').mask('00000-000');
+		});
+	  </script>
+    <div class="content-wrapper">
+
+      <!-- Main content -->
+      <div class="content mt-2">
+        <div class="container-fluid">
+          <div class="col-md-12">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Franqueado</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                  <form method="POST" action="/admin/partners/edit">
+                    <input type="text" value="<%= partner.id %>" name="id" readonly required hidden>
+                    
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Nome</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nome do parceiro"
+                          name="name" value="<%= partner.name %>" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="text" class="form-control" id="exampleInputEmail2"
+                          placeholder="email do parceiro" name="email" value="<%= partner.email %>" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Telefone</label>
+                        <input type="text" class="form-control" id="phoneInput" placeholder="Telefone"
+                          name="phone" value="<%= partner.phone %>" required>
+                      </div>
+                      <label for="cepInput">Cep</label>
+                      <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" id="cepInput" placeholder="Cep" name="cep" value="<%= partner.cep %>" required>
+                        <span class="input-group-append">
+                          <button type="button" class="btn btn-info btn-flat" onclick="findCep()">Pesquisar</button>
+                        </span>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Cidade</label>
+                        <input type="text" class="form-control" id="cityInput" placeholder="Cidade"
+                          name="city" value="<%= partner.city %>" readonly>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Bairro</label>
+                        <input type="text" class="form-control" id="districtInput" placeholder="Bairro"
+                          name="district" value="<%= partner.district %>" readonly>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Endereço</label>
+                        <input type="text" class="form-control" id="addressInput" placeholder="Endereço"
+                          name="address" value="<%= partner.address %>" readonly>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Número da residência</label>
+                        <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Número da residência"
+                          name="number" value="<%= partner.number %>" >
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Documento</label>
+                        <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Documento"
+                          name="document" value="<%= partner.document %>" required>
+                      </div>
+
+                    </div>
+
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">Editar</button>
+                    </div>
+                  </form>
+                </div>
+                <!-- /.card -->
+
+
+
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <%- include("../partials/footer"); %>

@@ -1,0 +1,76 @@
+<%- include("../partials/header"); %>
+	<div class="row">
+		<div class="col-8">
+			<!-- Start Best Seller -->
+			<section class="lattest-product-area pb-40 category-list">
+				<div class="row">
+					<% if (products.length == 0){ %> Nenhum produto encontrado! <% } %>
+					<% products.forEach((product)=> { %>
+						<!-- single product -->
+						<div class="col-lg-4 col-md-6">
+							<a href="/delivery/product/<%= product.id %>">
+								<div class="single-product">
+									<img class="img-fluid" style="box-shadow: 2px 0px 20px rgb(110, 110, 110);"
+										src="/assets/images/products/<%= product.imgUrl %>" alt="">
+
+									<div class="product-details">
+										<h5 style="color: #cb1d29;">
+											<%= product.name %>
+										</h5>
+										<div class="price">
+											<h6>R$ <%= parseFloat(product.price).toFixed(2).replace(".", "," ) %>
+											</h6>
+										</div>
+							</a>
+							<form method="POST" action="/delivery/increasetocart">
+								<div class="prd-bottom">
+									<input type="text" name="id" value="<%= product.id %>" readonly hidden>
+									<a href="#" onclick="$(this).closest('form').submit()" class="social-info">
+										<span class="ti-bag"></span>
+										<p class="hover-text">Adicionar</p>
+									</a>
+									<a href="/delivery/product/<%= product.id %>" class="social-info">
+										<span class="lnr lnr-eye"></span>
+										<p class="hover-text">Vizualizar</p>
+									</a>
+								</div>
+							</form>
+						</div>
+				</div>
+		</div>
+		<% }); %>
+		
+	</div>
+	</section>
+	<!-- End Best Seller -->
+	</div>
+	
+	<div class="col-4" style="margin-top: 20px;">
+		<div class="sidebar-categories">
+			<div class="head">Categorias</div>
+			<ul class="main-categories">
+
+				<li class="main-nav-list" <% if (categorySelected=="todos" ){ %> style="text-decoration: underline"
+					<% } %> ><a href="/delivery"><span class="lnr lnr-arrow-right"></span>Todos</a></li>
+				<% categories.forEach((category)=> { %>
+					<li class="main-nav-list" <% if (categorySelected==category.id){ %> style="text-decoration:
+						underline"<% } %>><a href="/delivery?category=<%= category.id %>"><span
+									class="lnr lnr-arrow-right"></span>
+								<%= category.name %>
+							</a></li>
+					<% }); %>
+			</ul>
+		</div>
+	</div>
+	</div>
+	<div class="row mb-4 mt-4">
+		<div class="col-8">
+		<% if(next){ %>
+		<a href="<%= url %>page=<%=page + 1%>" class="btn" style="float: right; background-color: #f2d734; color: white">>> Próxima</a>
+		<% } %>
+		<% if(before){ %>
+			<a href="<%= url %>page=<%=page-1%>" class="btn" style="float: left; background-color: #f2d734; color: white"><< Anterior</a>
+		<% } %>
+		</div>
+	</div>
+	<%- include("../partials/footer"); %>

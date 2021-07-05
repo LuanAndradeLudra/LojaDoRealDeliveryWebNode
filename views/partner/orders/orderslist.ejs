@@ -1,0 +1,118 @@
+<%- include("../partials/header"); %>
+  <%- include("../partials/navbar"); %>
+
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <% if (msg !=undefined) { %>
+            <div class="alert alert-info alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h5><i class="icon fas fa-info"></i> Alerta!</h5>
+              <%= msg %>
+            </div>
+            <% } %>
+              <div class="row mb-2">
+                <div class="col-sm-12">
+                  <h1 class="m-0">Pedidos</h1>
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <!-- Main content -->
+      <div class="content">
+        <div class="container-fluid">
+
+          <div class="card">
+
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Cliente</th>
+                  <th>Franqueado</th>
+                  <th>Valor</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+              <% orders.forEach((order) => { %>    
+                <tr>
+                  <td><%= order.id %></td>
+                  <td><%= order.client.name %> </td>
+                  <td><%= order.partner.name %> </td>
+                  <td>R$ <%= parseFloat(order.value).toFixed(2).replace(".", ","); %> </td>
+                  <td>
+                  <form method="POST" action="/partner/order/updatestage">
+                    <input type="text" name="id" value="<%= order.id %>" required hidden>
+                    <div class="input-group mb-3">
+                      <% if (order.stage != 4) { %>
+                      <select class="custom-select rounded-0" name="stage">
+                        <option value="<%= order.stage %>">
+                        <% if (order.stage == 0){ %>
+                          Aguardando
+                          <% } else if (order.stage == 1){ %>
+                          Aceito
+                          <% } else if (order.stage == 2){ %>
+                          Em entrega
+                          <% } else if (order.stage == 3){ %>
+                          Finalizado
+                          <% }  %>
+                        </option>
+                          <% if (order.stage != 0) { %>
+                            <option value="0">Aguardando</option> 
+                         <% } %>
+                         <% if (order.stage != 1) { %>
+                           <option value="1">Aceito</option> 
+                         <% } %>
+                         <% if (order.stage != 2) { %>
+                           <option value="2">Em entrega</option> 
+                         <% } %>
+                         <% if (order.stage != 3) { %>
+                         <option value="3">Finalizado</option> 
+                         <% } %>
+                      </select>
+                      <div class="input-group-append">
+                        <button type="submit" style="float: left; margin-right: 8px;" class="btn btn-sm btn-primary"><i class="fas fa-check"></i></button>
+                      </div>
+                      <% } else { %>
+                        Confirmado
+                        <% } %>
+                    </div>
+                  </form>
+                  </td>
+                  <td>
+                    <a href="/partner/order/<%= order.id %>" style="float: left; margin-right: 8px;" class="btn btn-sm btn-success"><i class="fas fa-book"></i></a>
+                    <form method="POST" action="/partner/order/delete" onsubmit="return confirm('Deseja realmente deletar esse pedido?')">
+                      <input type="text" value="<%= order.id %>" name="id" readonly required hidden>
+                      <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></input>
+                    </form>
+                  </td>
+                </tr>
+              <% }); %>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Id</th>
+                  <th>Nome</th>
+                  <th>Ações</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+
+<%- include("../partials/footer"); %>

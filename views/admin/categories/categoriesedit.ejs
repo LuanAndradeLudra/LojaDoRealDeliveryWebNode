@@ -1,0 +1,62 @@
+<%- include("../partials/header"); %>
+<%- include("../partials/navbar"); %>
+
+<div class="content-wrapper">
+
+    <!-- Main content -->
+    <div class="content mt-2">
+      <div class="container-fluid">
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <% if (msg != undefined) { %>
+            <div class="alert alert-info alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h5><i class="icon fas fa-info"></i> Alerta!</h5>
+              <%= msg %>
+            </div>
+          <% } %>
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Categoria</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form method="POST" action="/admin/categories/edit">
+              <input type="text" name="id" value="<%= category.id %>" readonly hidden required>
+              <input type="text" name="name" value="<%= category.name %>" readonly hidden required>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Nome</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nome da categoria" name="name" value="<%= category.name %>" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Descrição</label>
+                  <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Descrição da categoria" name="description" value="<%= category.description %>" required>
+                </div>
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Editar</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+
+      
+
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+<%- include("../partials/footer"); %>

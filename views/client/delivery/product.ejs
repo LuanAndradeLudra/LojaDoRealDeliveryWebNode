@@ -1,0 +1,55 @@
+<%- include("../partials/header"); %>
+	<!--================Single Product Area =================-->
+	<div class="product_image_area" style="margin-bottom: 100px;">
+		<div class="container">
+			<div class="row s_product_inner">
+				<div class="col-lg-4">
+					<img class="img-fluid" src="/assets/images/products/<%= product.imgUrl %>" alt="">
+				</div>
+				<div class="col-lg-6 offset-lg-1">
+					<div class="s_product_text" style="margin-top: 0px !important;">
+						<h3><%= product.name %></h3>
+						<h2>R$ <%= parseFloat(product.price).toFixed(2).replace(".", ","); %></h2>
+						<ul class="list">
+							<li><a class="active" href="#"><span>Categoria: </span><%= product.category.name %></a></li>
+						</ul>
+						<p><%= product.description %></p>
+						<div class="product_count">
+						<form method="POST" action="/delivery/increasetocart">
+							<input type="text" name="id" value="<%= product.id %>" readonly hidden>
+							<label for="qty">Quantidade:</label>
+							<input type="text" name="quantity" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) && (sst > 1 )) result.value--;return false;"
+							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+							</div>
+						<div class="card_area d-flex align-items-center">
+							<button type="submit" class="btn btn-block" style="background-color: #f2d734; color: white">Adicionar ao carrinho</button>
+						</div>
+					   </form>
+					</div>
+				</div>
+			</div>
+			<h3 style="margin-top: 30px;">Produtos relacionados</h3>
+			<div class="row" style="margin-top: 30px;">
+				<% relatedProducts.forEach((relatedProduct) => { %>  
+					<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+						<div class="single-related-product d-flex">
+							<a href="/delivery/product/<%= relatedProduct.id %>"><img src="/assets/images/products/<%= relatedProduct.imgUrl %>" width="100px" alt=""></a>
+							<div class="desc">
+								<a href="/delivery/product/<%= relatedProduct.id %>" class="title"><%= relatedProduct.name %></a>
+								<div class="price">
+									<h6>R$ <%=
+										parseFloat(relatedProduct.price).toFixed(2).replace(".", ","
+										); %></h6>
+								</div>
+							</div>
+						</div>
+					</div>	
+				<% }); %>
+			</div>
+		</div>
+	</div>
+	<!--================End Single Product Area =================-->
+<%- include("../partials/footer"); %>
