@@ -45,13 +45,13 @@
             flex-wrap: wrap;
             align-content: center;">
 
-                    <div class="col-sm-10 col-9">
+                    <div class="col-md-10 col-8">
                        <form method="GET" action="/delivery">
                         <input class="form-control" type="text" style="margin: 20px; border-radius: 40px;"
                         placeholder="Pesquisar..." name="query">
                     </form>
                     </div>
-                    <div class="col-sm-2 col-1" style="padding-left: 50px;">
+                    <div class="col-md-2 col-3" style="padding-left: 50px;">
                         <a href="#" style="color: white; font-size: 18px;"><span class="lnr lnr-magnifier" id="search"></span></a>
                     </div>
                 </div>
@@ -61,18 +61,26 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-2" style="margin-bottom: 100px;">
+			<div class="col-md-2 col-3" style="margin-bottom: 100px;">
 				<div class="sidebar-categories">
                     <a href="/" style="text-decoration: none; color: black;">
                         <div class="text-center mt-4">
-                          <img src="/assets/images/web/webico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                          <img src="/assets/images/web/webico.png" class="icon-header"> <br />
                           Inicio
                         </div>
                       </a>
+                      <% if (clientA == undefined) { %> 
+                        <a href="/login" style="text-decoration: none; color: black;">
+                          <div class="text-center mt-4">
+                            <img src="/assets/images/web/loginico.png" class="icon-header"> <br />
+                            Login
+                          </div>
+                        </a>
+                      <% } %>
                     <% if (order == ""){ %>
                         <a href="/delivery" style="text-decoration: none; color: black;">
                             <div class="text-center mt-4">
-                              <img src="/assets/images/web/deliveryico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                              <img src="/assets/images/web/deliveryico.png" class="icon-header"> <br />
                               Delivery
                             </div>
                           </a>
@@ -80,7 +88,7 @@
                     <% if (order == ""){ %>
                     <a href="/delivery/cart" style="text-decoration: none; color: black;">
                         <div class="text-center mt-4">
-                            <img src="/assets/images/web/cartico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                            <img src="/assets/images/web/cartico.png" class="icon-header"> <br />
                         Carrinho (<%= quantityItemsInCart %>)
                         </div>
                     </a>
@@ -88,7 +96,7 @@
                     <% if (order != ""){ %>
                         <a href="/delivery/order" style="text-decoration: none; color: black;">
                             <div class="text-center mt-4">
-                                <img src="/assets/images/web/deliveryico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                                <img src="/assets/images/web/deliveryico.png" class="icon-header"> <br />
                             Pedido
                             </div>
                         </a>
@@ -96,24 +104,17 @@
                         <% if (clientA != undefined){ %> 
                             <a href="/logout" style="text-decoration: none; color: black;">
                                 <div class="text-center mt-4">
-                                  <img src="/assets/images/web/logoutico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                                  <img src="/assets/images/web/logoutico.png" class="icon-header"> <br />
                                   Sair
                                 </div>
                               </a>
-                          <% } else { %> 
-                          <a href="/login" style="text-decoration: none; color: black;">
-                            <div class="text-center mt-4">
-                              <img src="/assets/images/web/loginico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
-                              Login
-                            </div>
-                          </a>
-                        <% } %>
+                          <% } %>
                     <a href="/beapartner" style="text-decoration: none; color: black;">
                         <div class="text-center mt-4">
-                            <img src="/assets/images/web/partnerico.png" class="rounded" alt="..." width="80px" style="border-radius: 40px;"> <br />
+                            <img src="/assets/images/web/partnerico.png" class="icon-header"> <br />
                         Seja um franqueado
                         </div>
                     </a>
 				</div>
 			</div>
-			<div class="col-10">
+			<div class="col-md-10 col-9">

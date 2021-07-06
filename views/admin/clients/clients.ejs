@@ -1,0 +1,80 @@
+<%- include("../partials/header"); %>
+  <%- include("../partials/navbar"); %>
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <% if (msg !=undefined) { %>
+            <div class="alert alert-info alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h5><i class="icon fas fa-info"></i> Alerta!</h5>
+              <%= msg %>
+            </div>
+            <% } %>
+              <div class="row mb-2">
+                <div class="col-sm-12">
+                  <h1 class="m-0">Clientes</h1>
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <!-- Main content -->
+      <div class="content">
+        <div class="container-fluid">
+
+          <div class="card">
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="col-1">Id</th>
+                  <th class="col-2">Nome</th>
+                  <th class="col-2">Email</th>
+                  <th class="col-2">Telefone</th>
+                  <th class="col-3">Endereço</th>
+                  <th class="col-2">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+              <% clients.forEach((client) => { %>    
+                <tr>
+                  <td><%= client.id %></td>
+                  <td><%= client.name %> </td>
+                  <td><%= client.email %> </td>
+                  <td><%= client.phone %> </td>
+                  <td><%= client.address %>,n° <%= client.number %> | <%= client.city %></td>
+                  <td>
+                    <a style="float: left; margin-right: 8px;" href="/admin/client/<%= client.id %>" class="btn btn-sm btn-success"><i class="fas fa-book"></i></a>
+                    <form method="POST" action="/admin/clients/delete" onsubmit="return confirm('Deseja realmente deletar o cliente <%= client.name %>')">
+                      <input type="text" value="<%= client.id %>" name="id" readonly required hidden>
+                      <input type="text" value="<%= client.name %>" name="name" readonly required hidden>
+                      <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></input>
+                    </form>
+                  </td>
+                </tr>
+              <% }); %>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Id</th>
+                  <th>Nome</th>
+                  <th>Preço</th>
+                  <th>Quantidade</th>
+                  <th>Ações</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+<%- include("../partials/footer"); %>

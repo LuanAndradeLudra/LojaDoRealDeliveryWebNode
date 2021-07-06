@@ -107,13 +107,50 @@
               </a>
             </li>
             </ul>
-            <li class="nav-item">
-              <a href="/admin/logout" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Sair</p>
-              </a>
-            </li>   
           </li>
+
+          <li class="nav-item" id="ulclientes">
+            <a href="#" class="nav-link" id="pag=/clientes">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Clientes
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item" id="pag=/clientslist">
+                <a href="/admin/clients" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listar</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item" id="ulpartners">
+            <a href="#" class="nav-link" id="pag=/config">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Configurações
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item" id="pag=/changepassword">
+                <a href="/admin/config/changepassword" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Alterar senha</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="/admin/logout" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Sair</p>
+            </a>
+          </li>   
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

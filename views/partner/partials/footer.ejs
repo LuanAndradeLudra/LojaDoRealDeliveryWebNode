@@ -4,7 +4,7 @@
     <strong>Copyright &copy; 2021 <a href="/">Loja do 1 Real</a>.</strong>
     Todos os direitos reservados!
     <div class="float-right d-none d-sm-inline-block">
-      <b>Versão</b> 1.0.0
+      <b>Versão</b> 1.1.0
     </div>
   </footer>
 <!-- ./wrapper -->
@@ -46,35 +46,40 @@
   if (url == '/partner/home'){
     document.getElementById('pag=/home').style = 'background-color: #007BFF';
   }
-  if (url == '/partner/orders/opened'){
+  if (url == '/partner/orders/all'){
     document.getElementById('pag=/orders').style = 'background-color: #007BFF';
     document.getElementById('pag=/ordersopened').style = 'background-color: #007Baa';
     document.getElementById('ulorders').classList.add("menu-open");
   }
-  if (url == '/partner/orders/waiting'){
+  if (url == '/partner/orders/0'){
     document.getElementById('pag=/orders').style = 'background-color: #007BFF';
     document.getElementById('pag=/orderswaiting').style = 'background-color: #007Baa';
     document.getElementById('ulorders').classList.add("menu-open");
   }
-  if (url == '/partner/orders/accepted'){
+  if (url == '/partner/orders/1'){
     document.getElementById('pag=/orders').style = 'background-color: #007BFF';
     document.getElementById('pag=/ordersaccepted').style = 'background-color: #007Baa';
     document.getElementById('ulorders').classList.add("menu-open");
   }
-  if (url == '/partner/orders/indelivery'){
+  if (url == '/partner/orders/2'){
     document.getElementById('pag=/orders').style = 'background-color: #007BFF';
     document.getElementById('pag=/ordersindelivery').style = 'background-color: #007Baa';
     document.getElementById('ulorders').classList.add("menu-open");
   }
-  if (url == '/partner/orders/finished'){
+  if (url == '/partner/orders/3'){
     document.getElementById('pag=/orders').style = 'background-color: #007BFF';
     document.getElementById('pag=/ordersfinished').style = 'background-color: #007Baa';
     document.getElementById('ulorders').classList.add("menu-open");
   }
-  if (url == '/partner/orders/confirmed'){
+  if (url == '/partner/orders/4'){
     document.getElementById('pag=/orders').style = 'background-color: #007BFF';
     document.getElementById('pag=/ordersconfirmed').style = 'background-color: #007Baa';
     document.getElementById('ulorders').classList.add("menu-open");
+  }
+  if (url == '/partner/config/changepassword'){
+    document.getElementById('pag=/config').style = 'background-color: #007BFF';
+    document.getElementById('pag=/changepassword').style = 'background-color: #007Baa';
+    document.getElementById('ulconfig').classList.add("menu-open");
   }
 </script>
 

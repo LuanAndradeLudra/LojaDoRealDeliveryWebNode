@@ -21,13 +21,18 @@ router.get("/login", function(req, res){
 router.post("/auth", function(req, res){
     var {email, password} = req.body;
     partnerModel.findOne({where: {email: email},},).then((partner) => {
-        if (bcrypt.compareSync(password, partner.password)){
-            req.session.partner = {
-                id: partner.id,
-                name: partner.name,
-                email: partner.email,
-            };
-            res.redirect("/partner/home");
+        if (partner != undefined){
+            if (bcrypt.compareSync(password, partner.password)){
+                req.session.partner = {
+                    id: partner.id,
+                    name: partner.name,
+                    email: partner.email,
+                };
+                res.redirect("/partner/home");
+            } else {
+                req.flash("msg", "Usuário inválido!");
+                res.redirect("/partner/login");
+            }
         } else {
             req.flash("msg", "Usuário inválido!");
             res.redirect("/partner/login");

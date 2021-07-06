@@ -1,6 +1,6 @@
 <%- include("../partials/header"); %>
 	<!--================Single Product Area =================-->
-	<div class="product_image_area" style="margin-bottom: 100px;">
+	<div style="margin-bottom: 100px; margin-top: 40px;">
 		<div class="container">
 			<div class="row s_product_inner">
 				<div class="col-lg-4">
@@ -13,7 +13,7 @@
 						<ul class="list">
 							<li><a class="active" href="#"><span>Categoria: </span><%= product.category.name %></a></li>
 						</ul>
-						<p><%= product.description %></p>
+						<p style="margin-bottom: 24px !important;"><%= product.description %></p>
 						<div class="product_count">
 						<form method="POST" action="/delivery/increasetocart">
 							<input type="text" name="id" value="<%= product.id %>" readonly hidden>

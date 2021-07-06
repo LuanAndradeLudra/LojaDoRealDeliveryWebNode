@@ -23,6 +23,14 @@ const OrdersModel = Connection.define('orders', {
         type: Sequelize.INTEGER,
         allownull: false,
     },
+    paymentMethod: {
+        type: Sequelize.STRING,
+        allownull: false,
+    },
+    paymentValue: {
+        type: Sequelize.STRING,
+        allownull: false,
+    },
 });
 
 

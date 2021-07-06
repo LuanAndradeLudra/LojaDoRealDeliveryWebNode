@@ -135,6 +135,13 @@ router.get("/cart", authClientMiddleware, cartSessionMiddleware, orderSessionMid
 router.post("/createorder", authClientMiddleware, cartSessionMiddleware, orderSessionMiddleware, function (req, res) {
     if (req.session.cart['value'] < 20) {
         req.flash("msg", `Seu pedido não pode ser abaixo de 20 reais`);
+        res.redirect("/delivery/cart");
+    } else if (req.body.paymentMethod == "Dinheiro" && req.body.paymentValue == "") {
+        req.flash("msg", `Se seu método de pagamento for dinheiro você precisará especificar o valor para troco`);
+        res.redirect("/delivery/cart");
+    } else if (req.body.paymentMethod == "Dinheiro" && parseFloat(req.body.paymentValue) < parseFloat(req.session.cart['value'])) {
+        req.flash("msg", `Seu valor para troco precisa ser maior do que o valor do pedido`);
+        res.redirect("/delivery/cart");
     } else {
         var order = {
             partnerId: 1,
@@ -142,19 +149,18 @@ router.post("/createorder", authClientMiddleware, cartSessionMiddleware, orderSe
             products: JSON.stringify(req.session.cart['productsInCart']),
             value: req.session.cart['value'],
             stage: 0,
+            paymentMethod: req.body.paymentMethod,
+            paymentValue: req.body.paymentValue,
         };
-        req.session.order = {
-            partnerId: 1,
-            clientId: req.session.client.id,
-            products: req.session.cart['productsInCart'],
-            value: req.session.cart['value'],
-            stage: 0,
-        }
-        req.session.cart = { productsInCart: [], value: 0, quantityItemsInCart: 0 };
-        ordersModel.create(order).then((data) => {
+
+        ordersModel.create(order).then(() => {
+            req.session.order = order;
+            req.session.order['products'] = req.session.cart['productsInCart'];
+            req.session.cart = { productsInCart: [], value: 0, quantityItemsInCart: 0 };
+            res.redirect("/delivery/cart")
         }).catch((error) => console.log("Erro: " + error));
     }
-    res.redirect("/delivery/cart");
+
 });
 
 router.get("/deletetocart/:product", authClientMiddleware, cartSessionMiddleware, orderSessionMiddleware, function (req, res) {
@@ -172,6 +178,8 @@ router.get("/deletetocart/:product", authClientMiddleware, cartSessionMiddleware
 
 router.get("/order", authClientMiddleware, cartSessionMiddleware, function (req, res) {
     if (req.session.order != undefined) {
+        var msg = req.flash("msg");
+        msg = msg.length == 0 ? undefined : msg;
         ordersModel.findOne(
             {
                 include: [{
@@ -246,11 +254,12 @@ router.get("/order", authClientMiddleware, cartSessionMiddleware, function (req,
                     orderProducts: JSON.parse(req.session.order.products),
                     clientA: req.session.client != undefined ? req.session.client : undefined,
                     stage: stage,
+                    msg: msg,
                 });
             }).catch((error) => console.log("Erro: " + error));
 
     } else {
-        res.redirect("/");
+        res.redirect("/delivery");
     }
 });
 

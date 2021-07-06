@@ -1,5 +1,6 @@
 <%- include("../partials/header"); %>
 <script>
+	setTimeout(function(){document.location.reload(true)}, 90000);
 	function print(){
 		
 		var order = document.getElementById('order').innerHTML;
@@ -27,19 +28,20 @@
 <!--================Order Details Area =================-->
 	<section class="order_details section_gap" id="order">
 		<div class="container">
-			<b>Pedido n° <%= order.id %></b> Status: <%= stage %> 
+			<% if (msg !=undefined) { %>
+                <div class="alert alert-warning alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5>Alerta!</h5>
+                    <%= msg %>
+                </div>
+                <% } %>
+			<b>Pedido n° <%= order.id %></b> Status: <%= stage %>  <br />
+			
 			<% if (order.stage == 3){ %>
-				<br /><br />
 				<form method="POST" action="/delivery/confirmorder">
 					<button type="submit" class="btn btn-warning">Confirmar</button>
-					<button class="btn btn-ligth" onclick="event.preventDefault(); print()">Imprimir</button>
 				</form>
-				<br /><br />
-			<% } else { %>
-				<br /><br />
-				<button type="submit" class="btn btn-ligth" onclick="document.location.reload(true)">Atualizar</button>	<button class="btn btn-ligth" onclick="print()">Imprimir</button>	
-				<br /><br />
-			<% } %>
+			<% }  %>
 			<br />
 			<div class="row invoice-info">
 				<div class="col-sm-6 invoice-col">
@@ -60,8 +62,9 @@
 					<strong><%= order.client.name %></strong><br>
 					Email: <%= order.client.email %><br>
 					Telefone: <%= order.client.phone %><br>
-					Localidade: <%= order.client.cep %> | <%= order.partner.city %> | <%= order.partner.district %> <br>
-					Endereço: <%= order.client.address %>, n° <%= order.client.number %>
+					Localidade: <%= order.client.cep %> | <%= order.client.city %> | <%= order.client.district %> <br>
+					Endereço: <%= order.client.address %>, n° <%= order.client.number %> <br />
+					Forma de pagamento: <%= order.paymentMethod %>
 				  </address>
 				</div>
 				<!-- /.col -->
@@ -96,7 +99,7 @@
 					  </tr>
 					<% }); %>
 					<tr>
-					  <td colspan="5" style="text-align: right;">Total: R$ <%=
+					  <td colspan="5" style="text-align: left;">Total: R$ <%=
 						parseFloat(order.value).toFixed(2).replace(".", ","
 						); %></td>
 					</tr>
@@ -106,6 +109,7 @@
 				<!-- /.col -->
 			  </div>
 			  <!-- /.row -->
+			  <button class="btn btn-ligth" onclick="event.preventDefault(); print()">Imprimir</button> <br /> <br />
 			</div>
 		</div>
 	</section>

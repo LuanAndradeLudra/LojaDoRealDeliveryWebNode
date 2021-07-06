@@ -19,75 +19,35 @@ router.get("/order/:id", authPartnerMiddleware, function(req, res) {
            msg: msg,
            order: order,
            orderProducts: JSON.parse(order.products),
+           "partnerName": req.session.partner.name,
        });
    });
 });
 
-router.get("/orders/opened", authPartnerMiddleware, function(req, res) {
-    var msg = req.flash("msg");
-    msg = msg.length == 0 ? undefined : msg;
-    ordersModel.findAll({ include: [{ model: clientsModel }, { model: partnersModel }], where: {stage: {
-        [Op.lt] : 4,
-    },},}).then((orders) => {
-         res.render("partner/orders/orderslist",{
-            msg: msg,
-            orders: orders,
+router.get("/orders/:stage", authPartnerMiddleware, async function(req, res) {
+    var stage = req.params.stage;
+    console.log(stage);
+    if (stage == "all"){
+        var orders = await ordersModel.findAll({ include: [{ model: clientsModel }, { model: partnersModel }], where: {stage: {
+            [Op.lt] : 4,
+        },},}).catch((error) => {
+            console.log("Erro: " + error);
+            res.redirect("/");
         });
-    });
-});
+    } else {
+        var orders = await ordersModel.findAll({ include: [{ model: clientsModel }, { model: partnersModel }], where: {stage: stage},}).catch((error) => {
+            console.log("Erro: " + error);
+            res.redirect("/");
+        });
+    }
 
-router.get("/orders/waiting", authPartnerMiddleware, function(req, res) {
     var msg = req.flash("msg");
     msg = msg.length == 0 ? undefined : msg;
-    ordersModel.findAll({ include: [{ model: clientsModel }, { model: partnersModel }], where: {stage: 0},}).then((orders) => {
-         res.render("partner/orders/orderslist",{
-            msg: msg,
-            orders: orders,
-        });
-    });
-});
-
-router.get("/orders/accepted", authPartnerMiddleware, function(req, res) {
-    var msg = req.flash("msg");
-    msg = msg.length == 0 ? undefined : msg;
-    ordersModel.findAll({ include: [{ model: clientsModel }, { model: partnersModel }], where: {stage: 1},}).then((orders) => {
-         res.render("partner/orders/orderslist",{
-            msg: msg,
-            orders: orders,
-        });
-    });
-});
-
-router.get("/orders/indelivery", authPartnerMiddleware, function(req, res) {
-    var msg = req.flash("msg");
-    msg = msg.length == 0 ? undefined : msg;
-    ordersModel.findAll({ include: [{ model: clientsModel }, { model: partnersModel }], where: {stage: 2},}).then((orders) => {
-         res.render("partner/orders/orderslist",{
-            msg: msg,
-            orders: orders,
-        });
-    });
-});
-
-router.get("/orders/finished", authPartnerMiddleware, function(req, res) {
-    var msg = req.flash("msg");
-    msg = msg.length == 0 ? undefined : msg;
-    ordersModel.findAll({ include: [{ model: clientsModel }, { model: partnersModel }], where: {stage: 3},}).then((orders) => {
-         res.render("partner/orders/orderslist",{
-            msg: msg,
-            orders: orders,
-        });
-    });
-});
-
-router.get("/orders/confirmed", authPartnerMiddleware, function(req, res) { 
-    var msg = req.flash("msg");
-    msg = msg.length == 0 ? undefined : msg;
-    ordersModel.findAll({ include: [{ model: clientsModel }, { model: partnersModel }], where: {stage: 4},}).then((orders) => {
-         res.render("partner/orders/orderslist",{
-            msg: msg,
-            orders: orders,
-        });
+    
+    res.render("partner/orders/orderslist",{
+        msg: msg,
+        orders: orders,
+        "partnerName": req.session.partner.name,
     });
 });
 
@@ -97,7 +57,7 @@ router.post("/order/updatestage", authPartnerMiddleware, function(req, res){
     msg = msg.length == 0 ? undefined : msg;
     ordersModel.update({stage: stage},{where: {id: id},}).then(() => {
         req.flash("msg", "Pedido alterado com sucesso!");
-        res.redirect("/partner/orders/opened");
+        res.redirect("/partner/orders/all");
     });
 });
 

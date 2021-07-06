@@ -56,6 +56,10 @@ const adminProductsRoutes = require("./routes/web/admin/adminProductsRoutes");
 app.use("/admin", adminProductsRoutes);
 const adminPartnersRoutes = require("./routes/web/admin/adminPartnersRoutes");
 app.use("/admin", adminPartnersRoutes);
+const adminConfigRoutes = require("./routes/web/admin/adminConfigRoutes");
+app.use("/admin", adminConfigRoutes);
+const adminClientsRoutes = require("./routes/web/admin/adminClientsRoutes");
+app.use("/admin", adminClientsRoutes);
 
 //RoutesPartner
 const partnerMainRoutes = require("./routes/web/partner/partnerMainRoutes");
@@ -64,6 +68,8 @@ const partnerAuthRoutes = require("./routes/web/partner/partnerAuthRoutes");
 app.use("/partner", partnerAuthRoutes);
 const partnerOrdersRoutes = require("./routes/web/partner/partnerOrdersRoutes");
 app.use("/partner", partnerOrdersRoutes);
+const partnerConfigRoutes = require("./routes/web/partner/partnerConfigRoutes");
+app.use("/partner", partnerConfigRoutes);
 
 //RoutesClients
 const clientMainRoutes = require("./routes/web/client/clientMainRoutes");

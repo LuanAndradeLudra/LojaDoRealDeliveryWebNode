@@ -149,6 +149,7 @@ router.post("/auth", function (req, res) {
 router.get("/logout", authClientMiddleware, function (req, res) {
     req.session.client = undefined;
     req.session.order = undefined;
+    req.session.cart = undefined;
     res.redirect("/");
 });
 

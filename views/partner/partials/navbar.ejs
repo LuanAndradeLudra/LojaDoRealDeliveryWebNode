@@ -11,7 +11,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <a href="#" class="d-block">Franqueado</a>
+          <a href="#" class="d-block"><%= partnerName %></a>
         </div>
       </div>
 
@@ -39,39 +39,57 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item" id="pag=/ordersopened">
-                <a href="/partner/orders/opened" class="nav-link">
+                <a href="/partner/orders/all" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Abertos</p>
                 </a>
               </li>
               <li class="nav-item" id="pag=/orderswaiting">
-                <a href="/partner/orders/waiting" class="nav-link">
+                <a href="/partner/orders/0" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Em espera</p>
                 </a>
               </li>
               <li class="nav-item" id="pag=/ordersaccepted">
-                <a href="/partner/orders/accepted" class="nav-link">
+                <a href="/partner/orders/1" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aceitos</p>
                 </a>
               </li>
               <li class="nav-item" id="pag=/ordersindelivery">
-                <a href="/partner/orders/indelivery" class="nav-link">
+                <a href="/partner/orders/2" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Em entrega</p>
                 </a>
               </li>
               <li class="nav-item" id="pag=/ordersfinished">
-                <a href="/partner/orders/finished" class="nav-link">
+                <a href="/partner/orders/3" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Finalizados</p>
                 </a>
               </li>
               <li class="nav-item" id="pag=/ordersconfirmed">
-                <a href="/partner/orders/confirmed" class="nav-link">
+                <a href="/partner/orders/4" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Confirmados</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item" id="ulconfig">
+            <a href="#" class="nav-link" id="pag=/config">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Configurações
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item" id="pag=/changepassword">
+                <a href="/partner/config/changepassword" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Alterar senha</p>
                 </a>
               </li>
             </ul>

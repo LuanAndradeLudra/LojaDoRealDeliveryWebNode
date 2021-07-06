@@ -34,6 +34,7 @@ router.get("/home", authPartnerMiddleware, function (req, res) {
             "totalGained": totalGained,
             "attendanceOrders": attendanceOrders,
             "finishedOrders": finishedOrders,
+            "partnerName": req.session.partner.name,
         });
     }).catch((error) => console.log(error));
 });

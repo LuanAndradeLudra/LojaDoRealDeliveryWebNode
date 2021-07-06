@@ -5,13 +5,6 @@
       <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container-fluid">
-          <% if (msg !=undefined) { %>
-            <div class="alert alert-info alert-dismissible">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-              <h5><i class="icon fas fa-info"></i> Alerta!</h5>
-              <%= msg %>
-            </div>
-            <% } %>
               <div class="row mb-2">
                 <div class="col-sm-12">
                   <h1 class="m-0">Pedidos</h1>
@@ -30,45 +23,36 @@
             <div class="row">
               <div class="col-12">
                 <h4>
-                  <i class="fas fa-globe"></i> Pedido n° <%= order.id %>.
+                  <i class="fas fa-globe"></i> Cliente <%= clientA.name%>.
                   <small class="float-right"><button onclick="window.print()" class="btn btn-primary"><span class="fas fa-print"></span></small>
                 </h4>
               </div>
               <!-- /.col -->
             </div>
-            <!-- info row -->
-            <div class="row invoice-info">
-              <div class="col-sm-6 invoice-col">
-                Franqueado
-                <address>
-                  <strong><%= order.partner.name %></strong><br>
-                  Email: <%= order.partner.email %><br>
-                  Telefone: <%= order.partner.phone %><br>
-                  Localidade: <%= order.partner.cep %> | <%= order.partner.city %> | <%= order.partner.district %> <br>
-                  Endereço: <%= order.partner.address %>, n° <%= order.partner.number %><br>
-                  Documento: <%= order.partner.document %>
-                </address>
-              </div>
-              <!-- /.col -->
-              <div class="col-sm-6 invoice-col">
-                Cliente
-                <address>
-                  <strong><%= order.client.name %></strong><br>
-                  Email: <%= order.client.email %><br>
-                  Telefone: <%= order.client.phone %><br>
-                  Localidade: <%= order.client.cep %> | <%= order.client.city %> | <%= order.client.district %> <br>
-                  Endereço: <%= order.client.address %>, n° <%= order.client.number %> <br />
-                  Forma de pagamento: <%= order.paymentMethod %> <% if (order.paymentMethod == "Dinheiro"){ %> | Troco para R$ <%= order.paymentValue %><% } %>
-                </address>
-              </div>
-              <!-- /.col -->
+            
+            <div class="col-12">
+              Cliente
+              <address>
+                <strong><%= clientA.name %></strong><br>
+                Email: <%= clientA.email %><br>
+                Telefone: <%= clientA.phone %><br>
+                Localidade: <%= clientA.cep %> | <%= clientA.city %> | <%= clientA.district %> <br>
+                Endereço: <%= clientA.address %>, n° <%= clientA.number %> <br />
+              </address>
             </div>
-            <!-- /.row -->
 
-            <!-- Table row -->
+            <% orders.forEach((order) => { %> 
+              <!-- Table row -->
             <div class="row">
               <div class="col-12 table-responsive">
                 <table class="table table-striped">
+                  <hr />
+                  Pedido número: <%= order.id %> - Status <%= order.stage == 0 ? "Aguardando" 
+                  : order.stage == 1 ? "Aceito" 
+                  : order.stage == 2 ? "Em entrega" 
+                  : order.stage == 3 ? "Finalizado" 
+                  : "Confirmado" %>
+                  <hr />
                   <thead>
                   <tr>
                     <th>Id</th>
@@ -79,7 +63,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <% orderProducts.forEach(orderProduct => { %>
+                  <% JSON.parse(order.products).forEach(orderProduct => { %>
                     <tr>
                       <td><%= orderProduct.product.id %></td>
                       <td><%= orderProduct.product.name %></td>
@@ -97,6 +81,7 @@
               <!-- /.col -->
             </div>
             <!-- /.row -->
+            <% }); %>
           </div>
 
         </div>

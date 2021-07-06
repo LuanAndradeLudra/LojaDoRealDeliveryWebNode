@@ -1,6 +1,6 @@
 <%- include("../partials/header"); %>
 	<div class="row">
-		<div class="col-8">
+		<div class="col-md-8 col-6">
 			<!-- Start Best Seller -->
 			<section class="lattest-product-area pb-40 category-list">
 				<div class="row">
@@ -45,7 +45,7 @@
 	<!-- End Best Seller -->
 	</div>
 	
-	<div class="col-4" style="margin-top: 20px;">
+	<div class="col-md-4 col-6" style="margin-top: 20px;">
 		<div class="sidebar-categories">
 			<div class="head">Categorias</div>
 			<ul class="main-categories">
@@ -66,7 +66,7 @@
 	<div class="row mb-4 mt-4">
 		<div class="col-8">
 		<% if(next){ %>
-		<a href="<%= url %>page=<%=page + 1%>" class="btn" style="float: right; background-color: #f2d734; color: white">>> Próxima</a>
+		<a href="<%= url %>page=<%=page + 1%>" class="btn" style="float: right; background-color: #f2d734; color: white">Próxima >></a>
 		<% } %>
 		<% if(before){ %>
 			<a href="<%= url %>page=<%=page-1%>" class="btn" style="float: left; background-color: #f2d734; color: white"><< Anterior</a>

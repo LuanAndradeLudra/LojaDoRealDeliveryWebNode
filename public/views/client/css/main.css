@@ -7,6 +7,94 @@
 /* Wide Mobile Layout: 480px */
 /* Section Gaps css
 ============================================================================================ */
+@media (min-width: 276px) { 
+  .icon-header{
+    max-width: 65px;
+  }
+
+  .cart_inner .table tbody tr td .product_count input {
+    width: 60px;
+    padding-left: 10px;
+    height: 40px;
+    outline: none;
+    box-shadow: none; }
+
+.img-product-cart{
+  display: none;
+}
+  
+.sidebar-categories .head {
+  line-height: 60px;
+  background: #f2d734;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 0 10px;
+  color: #fff; }
+.sidebar-categories .main-categories {
+  background: #fff;
+  box-shadow: 0 10px 10px rgba(153, 153, 153, 0.1); }
+.sidebar-categories .main-nav-list a {
+  font-size: 14px;
+  display: block;
+  line-height: 50px;
+  padding-left: 10px;
+  border-bottom: 1px solid #eee; }
+  .sidebar-categories .main-nav-list a:hover {
+    color: #f2d734; }
+  .sidebar-categories .main-nav-list a .number {
+    color: #cccccc;
+    margin-left: 0px; }
+  .sidebar-categories .main-nav-list a .lnr {
+    margin-right: 0px;
+    display: none; }
+.sidebar-categories .main-nav-list.child a {
+  padding-left: 32px; }
+ }
+
+@media (min-width: 800px) { 
+  .icon-header{
+    max-width: 90px;
+  }
+
+  .cart_inner .table tbody tr td .product_count input {
+    width: 100px;
+    padding-left: 30px;
+    height: 40px;
+    outline: none;
+    box-shadow: none; }
+
+  .img-product-cart{
+    display: block;
+  }
+  
+.sidebar-categories .head {
+  line-height: 60px;
+  background: #f2d734;
+  padding: 0 30px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff; }
+.sidebar-categories .main-categories {
+  padding: 0 20px;
+  background: #fff;
+  box-shadow: 0 10px 10px rgba(153, 153, 153, 0.1); }
+.sidebar-categories .main-nav-list a {
+  font-size: 14px;
+  display: block;
+  line-height: 50px;
+  padding-left: 10px;
+  border-bottom: 1px solid #eee; }
+  .sidebar-categories .main-nav-list a:hover {
+    color: #f2d734; }
+  .sidebar-categories .main-nav-list a .number {
+    color: #cccccc;
+    margin-left: 10px; }
+  .sidebar-categories .main-nav-list a .lnr {
+    margin-right: 10px;
+    display: none; }
+.sidebar-categories .main-nav-list.child a {
+  padding-left: 32px; }
+ }
 .no-padding {
   padding: 0; }
 
@@ -3289,34 +3377,6 @@ label {
       .single-organic-product-list:hover .price-wrap .compare p i {
         color: #fff; }
 
-.sidebar-categories .head {
-  line-height: 60px;
-  background: #f2d734;
-  padding: 0 30px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #fff; }
-.sidebar-categories .main-categories {
-  padding: 0 20px;
-  background: #fff;
-  box-shadow: 0 10px 10px rgba(153, 153, 153, 0.1); }
-.sidebar-categories .main-nav-list a {
-  font-size: 14px;
-  display: block;
-  line-height: 50px;
-  padding-left: 10px;
-  border-bottom: 1px solid #eee; }
-  .sidebar-categories .main-nav-list a:hover {
-    color: #f2d734; }
-  .sidebar-categories .main-nav-list a .number {
-    color: #cccccc;
-    margin-left: 10px; }
-  .sidebar-categories .main-nav-list a .lnr {
-    margin-right: 10px;
-    display: none; }
-.sidebar-categories .main-nav-list.child a {
-  padding-left: 32px; }
-
 .sidebar-filter {
   margin-top: 50px; }
   .sidebar-filter .top-filter-head {
@@ -4201,12 +4261,6 @@ label {
     margin-bottom: 0px; }
   .cart_inner .table tbody tr td .product_count {
     margin-bottom: 0px; }
-    .cart_inner .table tbody tr td .product_count input {
-      width: 100px;
-      padding-left: 30px;
-      height: 40px;
-      outline: none;
-      box-shadow: none; }
     .cart_inner .table tbody tr td .product_count .increase {
       top: -2px; }
       .cart_inner .table tbody tr td .product_count .increase:before {
@@ -4755,7 +4809,6 @@ label {
     font-size: 18px;
     margin-bottom: 30px; }
   .login_form_inner .login_form {
-    max-width: 600px;
     margin: auto; }
   .login_form_inner.reg_form {
     padding-top: 60px; }

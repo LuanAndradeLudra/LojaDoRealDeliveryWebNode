@@ -1,7 +1,20 @@
 <%- include("../partials/header"); %>
+<script type="text/javascript">
+		$(document).ready(function(){
+			$('#paymentValue').mask("#.##0,00", {reverse: true});
+		});
+    function showPaymentValue(value){
+        var paymentValueDiv = document.getElementById("paymentValueDiv");
+        if (value == "Dinheiro"){
+            paymentValueDiv.style.display = "block";
+        } else {
+            paymentValueDiv.style.display = "none";
+        }
+    }
+</script>
     <!--================Cart Area =================-->
     <section class="cart_area">
-        <div class="container">
+        <div>
             <% if (msg !=undefined) { %>
                 <div class="alert alert-warning alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -9,8 +22,8 @@
                     <%= msg %>
                 </div>
                 <% } %>
-                    <div class="cart_inner">
-                        <div class="table-responsive">
+                    <div class="cart_inner table-responsive">
+                        <div>
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -27,12 +40,15 @@
                                                 <div class="media">
                                                     <div class="media-body">
                                                         <p>
+                                                            <div class="img-product-cart" style="float: left; margin-right: 10px;">
+                                                                
                                                             <a href="/delivery/deletetocart/<%= productItemInCart.product.id %>"
-                                                                class="btn btn-danger btn-sm">x</a> <a
+                                                                class="btn btn-light btn-sm">x</a> <a
                                                                 href="/delivery/product/<%= productItemInCart.product.id %>"
                                                                 style="color: rgb(39, 39, 39);">
                                                                 <img src="/assets/images/products/<%= productItemInCart.product.imgUrl %>"
                                                                     style="width: 50px;">
+                                                            </div>
                                                                 <%= productItemInCart.product.name %>
                                                             </a>
                                                         </p>
@@ -47,7 +63,7 @@
                                             <td>
                                                 <div class="product_count">
 
-                                                    <input type="text" value="<%= productItemInCart.quantity %>" title="Quantity:" class="input-text qty">
+                                                    <input type="text" value="<%= productItemInCart.quantity %>" class="input-text">
 
                                                     <form method="POST" action="/delivery/increasetocart">
                                                         <input type="text" name="id" value="<%= productItemInCart.product.id %>" readonly hidden>
@@ -73,18 +89,35 @@
                                         </tr>
                                         <% }); %>
                                             <tr>
-                                                <th colspan="4" style="text-align: right;">
+                                                <th colspan="4" style="text-align: left;">
                                                     <span>
-                                                        Valor: R$ <%= parseFloat(cart.value).toFixed(2).replace(".", ","); %>
+                                                        Valor total: R$ <%= parseFloat(cart.value).toFixed(2).replace(".", ","); %>
                                                     </span>
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <td colspan="4" style="text-align: right;">
-                                                    <div class="checkout_btn_inner align-items-rigth">
-                                                        <form method="POST" action="/delivery/createorder">
-                                                            <button type="submit" class="btn primary-btn">Finalizar
-                                                                pedido</button>
+                                                <td colspan="4">
+                                                    <div class="checkout_btn_inner">
+                                                        <form method="POST" action="/delivery/createorder" onsubmit="return confirm('Finalizar seu pedido? Após clicar em [OK] seu pedido será montado e entregue!')">
+                                                            <div class="row">
+                                                                <div class="col-md-8 col-12">
+                                                                    <label for="paymentMethod">Selecione sua forma de pagamento</label>
+                                                                    <select class="form-control" id="paymentMethod" name="paymentMethod" onchange="showPaymentValue(this.value)" required>
+                                                                        <option value="Dinheiro">Dinheiro</option>
+                                                                        <option value="Cartão de débito">Cartão de débito</option>
+                                                                        <option value="Cartão de crédito">Cartão de crédito</option>
+                                                                      </select>
+                                                                </div>
+                                                                <div class="col-md-4 col-12">
+                                                                    <div id="paymentValueDiv" style="display: block">
+                                                                        <label for="paymentValue">Selecione seu troco</label>
+                                                                        <input type="text" name="paymentValue" id="paymentValue" class="form-control" placeholder="Troco para quanto?"> <br>
+                                                                    </div>
+                                                                    Clique para finalizar seu pedido
+                                                                    <button type="submit" class="btn primary-btn">Finalizar
+                                                                        pedido</button>
+                                                                </div>
+                                                            </div>
                                                         </form>
                                                     </div>
                                                 </td>
